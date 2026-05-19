@@ -1,0 +1,141 @@
+# Dodsal Static Site Handoff Summary
+
+This repository is a static clone/customization of the McDermott website, converted for Dodsal Group and deployed for `https://dodsal.stanceweb.us/`.
+
+## Current Repository
+
+- Local repo path: `/root/dist`
+- Branch: `main`
+- Remote: `https://github.com/Stance1234/dodsal.git`
+- Live document root: `/home/dodsal.stanceweb.us/public_html`
+- Live domain: `https://dodsal.stanceweb.us/`
+- Latest pushed cleanup commit: `12e8eea` (`Remove social and news sections`)
+
+## Major Work Completed
+
+### Static Site Clone
+
+- The source site was recursively mirrored into a static `dist`-style folder.
+- `index.html` is at the repository root.
+- HTML, CSS, JS, images, fonts, videos, and Drupal-style generated assets were preserved locally where available.
+- Asset paths were normalized enough for local/live static serving.
+- The site was copied to `/home/dodsal.stanceweb.us/public_html`.
+
+### Dodsal Rebranding
+
+Across the static export, McDermott branding and contact information were replaced with Dodsal Group information:
+
+- `McDermott` and `McDermott International` were replaced with `Dodsal Group`.
+- `mcdermott.com` / `McDermott.com` were replaced with `dodsalgroup.com`.
+- Contact/careers email references were replaced with Dodsal email addresses where found.
+- Contact information was updated to include:
+  - `+971 56 691 7399`
+  - `Dubai Corporate Headquarters (UAE)`
+  - `25th Floor, Ubora Towers, Business Bay, Dubai, UAE`
+  - `P.O. Box: 8034, Dubai, UAE`
+- Canonical/meta/domain references were updated where found.
+
+### Image and Broken Asset Fixes
+
+- Broken image URLs generated from malformed Drupal-style WebP paths were repaired.
+- The Dodsal logo asset exists locally at:
+  - `themes/custom/dodsalgroup_corp_theme/dodsalgroup-white-logo.svg`
+- The specific Sustainability image that previously had a broken path exists locally at:
+  - `sites/default/files/styles/webp/public/2026-03/Sustainability 1 (1).png__q__itok_gfMbcHd0__e879540b.webp`
+
+Important remaining caveat: not every referenced image/icon asset is fully local/offline-clean yet. A later scan found:
+
+- `952` local image files under `/root/dist`
+- `422` unique local image references
+- `12` remaining external image/icon URLs, mostly Drupal core UI icons under `https://www.dodsalgroup.com/core/...`
+- `28` missing local image/icon references, mostly Bootstrap Barrio file-type icons, Drupal misc icons, and FontAwesome SVG webfont references
+
+The main visible content imagery appears local, but some theme/UI icon/font assets still need cleanup if full offline operation is required.
+
+### Social, News, Press, and Helpline Removal
+
+A repeatable cleanup script was added:
+
+- `cleanup-social-news.js`
+
+That script processes the static export and removes:
+
+- Social media navigation/components:
+  - `menu--social-links`
+  - Facebook/Twitter/LinkedIn/YouTube social classes/links
+  - homepage/header/footer social blocks
+- `News & Insights` menu and footer links
+- Links to `news-insights` and `press-release-detail` content
+- `Subscribe to Latest News` CTAs
+- The exact Convercent Helpline URL:
+  - `https://app.convercent.com/en-US/LandingPage/8dba4f3d-baae-ec11-a98a-000d3ab9f296`
+- Homepage latest press release block
+- About page News & Insights promo card
+- Investors page Press Releases card
+
+The script also deletes dedicated News/Press archive content:
+
+- `news-insights.html`
+- `news-insights/`
+- `press-release-detail/`
+- `taxonomy/term/`
+
+The cleanup intentionally leaves `Social Commitments` sustainability content intact.
+
+## Verification Already Run
+
+### Removed Content Marker Scan
+
+The following marker scan returned zero matches in `/root/dist`:
+
+```bash
+rg -n "menu--social-links|facebook-social-link|twitter-social-link|linkedin-social-link|youtube-soical-link|news-insights|press-release-detail|News &amp; Insights|Subscribe to Latest News|app\.convercent\.com/en-US/LandingPage/8dba4f3d-baae-ec11-a98a-000d3ab9f296|>Helpline<" /root/dist
+```
+
+The equivalent scan also returned zero matches in the live document root:
+
+```bash
+rg -n "menu--social-links|news-insights|press-release-detail|Subscribe to Latest News|app\.convercent\.com/en-US/LandingPage/8dba4f3d-baae-ec11-a98a-000d3ab9f296|>Helpline<" /home/dodsal.stanceweb.us/public_html
+```
+
+### Key Page Checks
+
+These live pages returned HTTP `200` when checked with `curl -k -I`:
+
+- `https://dodsal.stanceweb.us/`
+- `https://dodsal.stanceweb.us/about-us.html`
+- `https://dodsal.stanceweb.us/investors.html`
+- `https://dodsal.stanceweb.us/sustainability/social-commitments.html`
+
+Note: `curl` required `-k` because the server presented a self-signed certificate to the command-line client.
+
+### Git State
+
+After the cleanup commit and push:
+
+```bash
+git status --short --branch
+```
+
+showed:
+
+```text
+## main...origin/main
+```
+
+That means the working tree was clean at that point.
+
+## Recommended Next Steps
+
+1. Make the remaining theme/UI icon assets fully local:
+   - Drupal core icons under `core/misc/icons`
+   - Drupal misc GIFs such as loading/throbber assets
+   - Bootstrap Barrio file-type icons under `themes/custom/contrib/bootstrap_barrio/images`
+   - FontAwesome SVG webfont files under `assets/vendor/webfonts`
+
+2. Re-run the external/missing asset scan after fixing those assets.
+
+3. If additional cleanup is needed, update `cleanup-social-news.js` rather than manually editing generated HTML one file at a time.
+
+4. After any changes, copy `/root/dist/.` back into `/home/dodsal.stanceweb.us/public_html/`, then commit and push.
+
