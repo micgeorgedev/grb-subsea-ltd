@@ -1,0 +1,4 @@
+#global-footprint-map{background:#eef2f4;min-height:560px}
+.desktop-google-translate,.mobile-google-translate,.gtranslate_wrapper:empty{display:none!important}
+iframe[src="/assets/offline/embed-unavailable.html"]{background:#f5f7f8;border:0}
+.offline-map-placeholder{background:#eef2f4;border-radius:12px;overflow:hidden}.offline-map-card{display:flex;align-items:center;justify-content:center;min-height:560px;background:linear-gradient(180deg,#edf2f4 0%,#d8e3e8 100%)}.offline-map-card img{display:block;max-width:100%;height:auto}
