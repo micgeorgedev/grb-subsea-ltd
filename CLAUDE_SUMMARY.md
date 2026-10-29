@@ -2,6 +2,14 @@
 
 This repository is a static clone/customization of the McDermott website, converted for GRB SUBSEA LTD and deployed for `https://grbsubsealtd.com/`.
 
+## Color System
+
+- **Abyss**: `#061826` — deepest backgrounds, header, and footer
+- **Deep Ocean**: `#073B4C` — primary brand surfaces
+- **Bathymetric Blue**: `#0077B6` — complementary technical accents and secondary actions
+- **Sonar Orange**: `#FF8C42` — primary calls to action and energy accents
+- **Burnt Sonar**: `#D9661F` — hover and pressed states
+
 ## Current Repository
 
 - Local repo path: `/root/grb-subsea-ltd`

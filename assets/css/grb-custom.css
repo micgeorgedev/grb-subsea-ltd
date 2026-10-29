@@ -1,3 +1,34 @@
+:root {
+    --grb-abyss: #061826;
+    --grb-deep-ocean: #073B4C;
+    --grb-bathymetric-blue: #0077B6;
+    --grb-sonar-orange: #FF8C42;
+    --grb-sonar-orange-hover: #D9661F;
+}
+
+/* High-contrast action treatment: dark text is required on Sonar Orange. */
+.btn-primary,
+.form-submit {
+    background-color: var(--grb-sonar-orange) !important;
+    border-color: var(--grb-sonar-orange) !important;
+    color: var(--grb-abyss) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.form-submit:hover,
+.form-submit:focus {
+    background-color: var(--grb-sonar-orange-hover) !important;
+    border-color: var(--grb-sonar-orange-hover) !important;
+    color: var(--grb-abyss) !important;
+}
+
+.btn-primary:focus-visible,
+.form-submit:focus-visible {
+    outline: 3px solid var(--grb-bathymetric-blue);
+    outline-offset: 3px;
+}
+
 /* Logo sizing — 1.5x original (50px base) */
 .navbar-brand img {
     height: 75px !important;
@@ -47,7 +78,7 @@
     background-color: #ffffff;
     color: #333333;
     padding: 24px 32px;
-    border-left: 4px solid #1E242B;
+    border-left: 4px solid var(--grb-sonar-orange);
     margin-bottom: 24px;
 }
 .grb-group-contact-details p {
@@ -56,9 +87,10 @@
     line-height: 1.8;
 }
 .grb-group-contact-details a {
-    color: #1E242B;
+    color: var(--grb-bathymetric-blue);
     text-decoration: none;
 }
 .grb-group-contact-details a:hover {
+    color: var(--grb-sonar-orange-hover);
     text-decoration: underline;
 }
