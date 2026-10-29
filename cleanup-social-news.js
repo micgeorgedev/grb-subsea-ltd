@@ -127,7 +127,7 @@ function removePressNewsCardItems(html) {
     (chunk) => {
       const opening = chunk.slice(0, 250);
       if (!/\bclass=["'][^"']*\bfield__item\b/i.test(opening)) return false;
-      return new RegExp(`${newsPath}/press-releases\\.html|Press Releases_1\\.jpg|Dodsal Group Press Releases|${newsLabel}`, 'i').test(chunk);
+      return new RegExp(`${newsPath}/press-releases\\.html|Press Releases_1\\.jpg|GRB SUBSEA LTD Press Releases|${newsLabel}`, 'i').test(chunk);
     },
     'remove promo card items',
   );
@@ -142,9 +142,9 @@ function cleanupHtml(html) {
   );
 
   for (const id of [
-    'block-dodsalgroup-corp-theme-latestpressreleaseblock',
-    'block-dodsalgroup-corp-theme-linkedinpostsblock',
-    'block-dodsalgroup-corp-theme-subscribepressreleaseblock',
+    'block-grbsubsealtd-corp-theme-latestpressreleaseblock',
+    'block-grbsubsealtd-corp-theme-linkedinpostsblock',
+    'block-grbsubsealtd-corp-theme-subscribepressreleaseblock',
   ]) {
     html = removeDivById(html, id, `remove ${id}`);
   }
@@ -152,7 +152,7 @@ function cleanupHtml(html) {
   html = removeMatchingElements(
     html,
     'div',
-    (chunk) => /\bblock-dodsalgroup-corp-press-releases\b/i.test(chunk.slice(0, 500)),
+    (chunk) => /\bblock-grbsubsealtd-corp-press-releases\b/i.test(chunk.slice(0, 500)),
     'remove generated press release blocks',
   );
 
@@ -268,7 +268,7 @@ if (fs.existsSync(taxonomyTermPath)) {
   for (const file of walk(taxonomyTermPath).filter((candidate) => fs.existsSync(candidate))) {
     const content = fs.readFileSync(file, 'utf8');
     if (
-      new RegExp(`${newsPath}|${pressDetailPath}|${latestNewsCta}|block-dodsalgroup-corp-theme-subscribepressreleaseblock`, 'i')
+      new RegExp(`${newsPath}|${pressDetailPath}|${latestNewsCta}|block-grbsubsealtd-corp-theme-subscribepressreleaseblock`, 'i')
         .test(content)
     ) {
       fs.rmSync(file, { force: true });

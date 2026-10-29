@@ -1,0 +1,64 @@
+/* Logo sizing — 1.5x original (50px base) */
+.navbar-brand img {
+    height: 75px !important;
+    width: auto !important;
+    max-width: none !important;
+}
+.navbar {
+    height: auto !important;
+    min-height: 75px;
+}
+
+/* Tablet */
+@media (max-width: 991px) {
+    .navbar-brand img {
+        height: 60px !important;
+    }
+    .navbar {
+        min-height: 60px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 575px) {
+    .navbar-brand img {
+        height: 45px !important;
+    }
+    .navbar {
+        min-height: 45px;
+    }
+}
+
+/* Clip banner image to container — prevents it overflowing into page content */
+.featured-top__inner {
+    overflow: hidden;
+    position: relative;
+}
+
+/* Force job listings visible (AOS fade-up was keeping them at opacity:0) */
+.careers-job-listing {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+/* Contact details block */
+.grb-group-contact-details {
+    background-color: #ffffff;
+    color: #333333;
+    padding: 24px 32px;
+    border-left: 4px solid #1E242B;
+    margin-bottom: 24px;
+}
+.grb-group-contact-details p {
+    color: #333333;
+    margin: 0;
+    line-height: 1.8;
+}
+.grb-group-contact-details a {
+    color: #1E242B;
+    text-decoration: none;
+}
+.grb-group-contact-details a:hover {
+    text-decoration: underline;
+}
